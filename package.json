@@ -1,0 +1,25 @@
+{
+  "name": "personal-context-manager",
+  "version": "1.0.0",
+  "description": "MCP server for persistent personal context management across AI conversations",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "personal-context-manager": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "start": "node dist/index.js"
+  },
+  "keywords": ["mcp", "context", "memory"],
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.26.0",
+    "zod": "^3.25.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.5.0"
+  }
+}
