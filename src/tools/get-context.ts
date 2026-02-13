@@ -22,8 +22,10 @@ export function registerGetContextTool(
               status: 'ok',
               count: results.length,
               results: results.map((e) => ({
+                id: e.id,
                 key: e.key,
                 value: e.value,
+                category: e.category,
                 tags: e.tags,
               })),
             },

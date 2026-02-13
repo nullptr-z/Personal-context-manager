@@ -22,11 +22,13 @@ export function registerListContextsTool(
               status: 'ok',
               totalEntries: entries.length,
               entries: entries.map((e) => ({
+                id: e.id,
                 key: e.key,
                 value:
                   e.value.length > 100
                     ? e.value.substring(0, 100) + '...'
                     : e.value,
+                category: e.category,
                 tags: e.tags,
               })),
             },

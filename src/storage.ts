@@ -33,7 +33,12 @@ export class ContextStorage {
 
   private readStore(): ContextStore {
     this.ensureFile();
-    const raw = readFileSync(this.filePath, 'utf-8');
+    const raw = readFileSync(this.filePath, 'utf-8').trim();
+    if (!raw) {
+      const empty: ContextStore = { version: 1, entries: [] };
+      this.writeStore(empty);
+      return empty;
+    }
     return JSON.parse(raw) as ContextStore;
   }
 
@@ -47,6 +52,7 @@ export class ContextStorage {
   upsert(
     key: string,
     value: string,
+    category?: string,
     tags?: string[],
   ): UpsertResult {
     const store = this.readStore();
@@ -55,6 +61,7 @@ export class ContextStorage {
 
     if (existing) {
       existing.value = value;
+      existing.category = category ?? existing.category;
       existing.tags = tags ?? existing.tags;
       existing.updatedAt = now;
       this.writeStore(store);
@@ -65,6 +72,7 @@ export class ContextStorage {
       id: randomUUID(),
       key,
       value,
+      category,
       tags: tags ?? [],
       createdAt: now,
       updatedAt: now,
@@ -84,6 +92,7 @@ export class ContextStorage {
         const hay = [
           e.key.toLowerCase(),
           e.value.toLowerCase(),
+          (e.category ?? '').toLowerCase(),
           ...e.tags.map((t) => t.toLowerCase()),
         ].join(' ');
         return keywords.some((kw) => hay.includes(kw));
