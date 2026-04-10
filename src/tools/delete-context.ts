@@ -7,7 +7,7 @@ export function registerDeleteContextTool(
   storage: ContextStorage,
 ): void {
   server.registerTool('delete_context', {
-    description: 'Delete a personal context entry by its ID. Use this tool when: 1) The user explicitly asks to forget/remove something. 2) An existing entry is outdated and contradicted by newer information (e.g. user no longer likes a food they previously liked). Always use get_context or list_contexts first to find the entry ID before deleting.',
+    description: 'Delete a personal memory entry by ID. Use when: 1) User asks to forget something. 2) Entry is outdated/contradicted by newer info. Always use get_context or list_contexts first to find the entry ID.',
     inputSchema: DeleteContextInput,
   }, async (args) => {
     const deleted = storage.delete(args.id);

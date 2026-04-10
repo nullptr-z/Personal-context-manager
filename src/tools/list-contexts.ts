@@ -8,7 +8,7 @@ export function registerListContextsTool(
 ): void {
   server.registerTool('list_contexts', {
     description:
-      'List all stored personal context entries. Returns a summary of all entries.',
+      'List all entries in personal memory. Returns summary of stored user preferences, habits, and facts.',
     inputSchema: ListContextsInput,
   }, async () => {
     const entries = storage.list();

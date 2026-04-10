@@ -8,7 +8,10 @@ export function registerGetContextTool(
 ): void {
   server.registerTool('get_context', {
     description:
-      'Search and retrieve personal context entries by keyword. Returns matching entries sorted by most recently updated.',
+      'Search personal memory by keyword. Returns stored user preferences, habits, and facts sorted by most recently updated. '
+      + 'PROACTIVE: Auto-call at the START of coding tasks to retrieve relevant conventions, and when user mentions code quality/style/review. '
+      + 'Triggers — EN: "check/review/convention/lint/format/best practice" ZH: "检查/规范/风格/命名/写法/单测". '
+      + 'Extract topic keywords from user message to search (e.g. "单测" → search "测试").',
     inputSchema: GetContextInput,
   }, async (args) => {
     const results = storage.search(args.query);
